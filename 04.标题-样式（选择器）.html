@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>title的位置在浏览器的标题栏</title>
+    <!-- 方式二：内部样式 -->
+    <style>
+        span{
+            color: gray;
+        }
+
+        /* 类选择器 */
+        .abc{
+            color: red;
+        }
+
+        /* id选择器 */
+        #abcde{
+            color: blue;
+        }
+    </style>
+
+    <!-- 方式三：外部样式（rel= stylesheet 表示css样式表，href= css/news.css 表示样式表的路径名） -->
+    <link rel="stylesheet" href="css/news.css">
+</head>
+<body>
+    <!-- 定义一个标题，标题内容：标题 -->
+    <h1>标题</h1>
+
+    <!-- 定义一个超链接，在新窗口打开（默认target="_self"，在当前窗口打开） 展示 b站 时间：2016/5/1  -->
+    <a href="https://www.bilibili.com/" target="_blank">b站</a>
+
+    <!-- 方式一：行内样式 -->
+    <!-- <span style="color: gray;">2016/5/1</span> -->
+    <span>2016/5/1</span>
+
+    <!-- 选择器 class（class="类名"） -->
+    <span class="abc">2016/5/2</span>
+    
+    <!-- 选择器 id（id="id名"） -->
+    <span id="abcde">2016/5/3</span>
+    
+</body>
+</html>

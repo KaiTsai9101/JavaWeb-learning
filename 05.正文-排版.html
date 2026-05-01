@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>title的位置在浏览器的标题栏</title>
+    <!-- 方式二：内部样式 -->
+    <style>
+        span{
+            color: gray;
+        }
+    </style>
+
+    <!-- 方式三：外部样式（rel= stylesheet 表示css样式表，href= css/news.css 表示样式表的路径名） -->
+    <link rel="stylesheet" href="css/news.css">
+</head>
+<body>
+    <!-- 定义一个标题，标题内容：标题 -->
+    <h1>标题</h1>
+
+    <!-- 定义一个超链接，在新窗口打开（默认target="_self"，在当前窗口打开） 展示 b站 时间：2016/5/1  -->
+    <a href="https://www.bilibili.com/" target="_blank">b站</a>
+
+    <span>2016/5/1</span>
+
+    <!-- br 换行标签 -->
+    <br><br>
+
+    <!-- 正文 -->
+
+    <!-- 定义一个视频
+     controls 控制条
+     autoplay 自动播放
+     loop 循环播放
+     width height 单位：px（像素）或 %（百分比） 一般设置一个就可以了，另一个会等比例缩放
+      -->
+    <video src="video/1.mp4" controls autoplay width="500"></video>
+    <br>
+    <audio src="audio/1.mp3" controls autoplay></audio>
+
+    <!-- 段落标签 -->
+    <p>段落内容1</p>
+    <p>段落内容2</p>
+
+    <!-- 定义一张图片 -->
+    <img src="img/1.gif" alt="图片描述">
+
+    <p>段落内容3</p>
+    <p>段落内容4</p>
+
+    <img src="img/1.gif" alt="图片描述">
+    
+    <p>段落内容5</p>
+    <p>段落内容6</p>
+
+    <img src="img/1.gif" alt="图片描述">
+
+    <p>段落内容7</p>
+    <p>段落内容8</p>
+
+    <img src="img/1.gif" alt="图片描述">
+
+    <p>段落内容9</p>
+    <p>段落内容10</p>
+
+    <img src="img/1.gif" alt="图片描述">
+
+</body>
+</html>

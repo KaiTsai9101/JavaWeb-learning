@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单标签</title>
+</head>
+<body>
+    <!-- form表单:
+        action 表单数据提交的地址
+        method 提交方法：
+            get：默认，表单数据会出现在url后面，形式：/save?name=xxx&age=xxx
+            特点：
+                1. 在浏览器中get请求的大小是有限的，数据量小，适合提交简单的数据
+                2. 数据会出现在url后面，如果包含了隐私数据，get方式不安全
+            post：表单数据不会出现在url后面，数据会作为消息体/请求体发送给服务器，形式：name=xxx&age=xxx
+            特点：
+                1. 请求大小没有限制，数据量大，适合提交复杂的数据
+                2. 数据不会出现在url后面，相对get请求方式来说更安全
+        注意：表单项要想能够采集数据，必须给表单项设置name属性
+    -->
+    <form action="/save" method="get">
+        姓名：<input type="text" name="name">
+        年龄：<input type="text" name="age">
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>
