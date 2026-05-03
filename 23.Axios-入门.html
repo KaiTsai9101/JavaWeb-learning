@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios-入门</title>
+</head>
+<body>
+    <input type="button" value="获取数据GET" id="btnGET">
+    <input type="button" value="提交数据POST" id="btnPOST">
+
+    <!-- 以下两种src都可以，但是要注意script标签如果写了外部文件路径后，script标签内部代码将无效 -->
+    <!-- 所以需要写两个script标签，第一个script标签只负责引入库，里面不要写任何代码 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script src="./js/axios.min.js"></script> -->
+
+    <!-- 第二个script标签，只负责写业务逻辑，不要加 src 属性 -->
+    <script>
+        // 发送GET请求
+        document.querySelector('#btnGET').addEventListener('click', function(){
+            // axios发起异步请求
+            axios({
+                url: 'https://mock.apifox.cn/m1/3083103-0-default/emps/list',
+                method: 'GET',
+            }).then((result) => {       // 成功回调函数
+                console.log(result.data);
+            }).catch((error) => {       // 失败回调函数
+                console.log(error);
+            });
+        })
+
+        // 发送POST请求
+        document.querySelector('#btnPOST').addEventListener('click', function(){
+            // axios发起异步请求
+            axios({
+                url: 'https://mock.apifox.cn/m1/3083103-0-default/emps/update',
+                method: 'POST',
+                data: 'id=1'    // POST请求方式，请求体
+            }).then((result) => {       // 成功回调函数
+                console.log(result.data);
+            }).catch((error) => {       // 失败回调函数
+                console.log(error);
+            });
+        })
+    </script>
+</body>
+</html>

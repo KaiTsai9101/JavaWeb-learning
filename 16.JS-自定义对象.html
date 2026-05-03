@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS-自定义对象</title>
+</head>
+<body>
+    
+
+    <script>
+        // 自定义对象
+        let person = {
+            name: '张三',
+            age: 18,
+            show: function(){
+                alert(this.name + ' ' + this.age);
+            }
+        }
+
+        alert(person.name);
+        person.show();
+
+        // JSON - JS对象标记法
+        let user = {
+            name: '张三',
+            age: 18,
+            gender: '男'
+        }
+        alert(user);
+        alert(JSON.stringify(user));    // JS对象 --> JSON字符串
+
+        let userJson = '{"name": "张三", "age": 18, "gender": "男"}';
+        alert(JSON.parse(userJson).name);
+    </script>
+</body>
+</html>

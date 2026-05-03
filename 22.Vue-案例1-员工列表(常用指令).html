@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>素质学习辅助系统</title>
+    <style>
+        /* 顶部导航栏样式 */
+        .navbar {
+            background-color: #b5b3b3;
+
+            /* 控制h1和超链接的样式 */
+            display: flex;      /* 弹性布局 */
+            justify-content: space-between;     /* 两端对齐 */
+            
+            padding: 10px;   /* 内边距 */
+            align-items: center;     /* 垂直居中对齐 */
+        }
+
+        .navbar h1 {
+            margin: 0;      /* 移除默认的外边距 */
+            font-weight: bold;  /* 加粗 */
+            color: white;
+            font-family: "楷体";     /* 字体 */
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;      /* 去掉下划线 */
+        }
+
+        /* 搜索表单样式 */
+        .search-form {
+            display: flex;      /* 弹性布局 */
+            flex-wrap: nowrap;      /* 不换行 */
+            align-items: center;     /* 垂直居中对齐 */
+            gap: 10px;      /* 控件之间的间距 */
+            margin: 20px 0;
+        }
+
+        .search-form input[type="text"], .search-form select {
+            padding: 5px;
+            width: 260px;
+        }
+
+        .search-form button {
+            padding: 5px, 15px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;      /* 合并单元格 */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {    /* 表头 */
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even){     /* 偶数行 */
+            background-color: #f2f2f2;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #b5b3b3;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 30px;
+        }
+
+        /* 容器样式 */
+        #container { 
+            width: 80%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"> 
+        <!-- 顶部导航栏区域 -->
+        <div class="navbar">
+            <h1 >素质学习辅助系统</h1>
+            <a href="#">退出登录</a>
+        </div>
+
+        <!-- 搜索表单区域 -->
+        <form action="/search" method="post" class="search-form">
+            <label for="name">姓名：</label>
+            <input type="text" id="name" name="name" v-model="searchForm.name" placeholder="请输入姓名">
+
+            <label for="gender">性别：</label>
+            <select name="gender" id="gender" v-model="searchForm.gender">
+                <option value="请选择"></option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+
+            <label for="position">职位：</label>
+            <select name="position" id="position" v-model="searchForm.position">
+                <option value="请选择"></option>
+                <option value="班主任">班主任</option>
+                <option value="讲师">讲师</option>
+                <option value="学工主管">学工主管</option>
+                <option value="教研主管">教研主管</option>
+                <option value="咨询师">咨询师</option>
+            </select>
+
+            <!-- v-on:click="" 绑定点击事件，可简写为@click="" -->
+            <button type="button" v-on:click="search">查询</button>
+            <button type="button" @click="clear">清空</button>
+        </form>
+
+        <!-- 表格展示区 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>头像</th>
+                    <th>职位</th>
+                    <th>入职日期</th>
+                    <th>最后操作时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr v-for="(e, index) in empList":key="e.id">
+                    <td>{{index + 1}}</td>
+                    <td>{{e.name}}</td>
+
+                    <!-- v-if v-else 控制元素的显示与隐藏 -->
+                    <td>
+                        <span v-if="e.gender == 1">男</span>
+                        <span v-else>女</span>
+                    </td>
+
+                    <!-- alt表示当图片加载失败时显示的文本 -->
+                    <!-- 插值表达式是不能出现在标签内部的，这里需要用v-bind:（简写为:） -->
+                    <td><img class="avatar" v-bind:src="e.image" :alt="e.name"></td>
+
+                    <!-- v-if v-else-if v-else 控制元素的显示与隐藏 -->
+                    <td>
+                        <span v-if="e.position == 1">班主任</span>
+                        <span v-else-if="e.position == 2">讲师</span>
+                        <span v-else-if="e.position == 3">学工主管</span>
+                        <span v-else-if="e.position == 4">教研主管</span>
+                        <span v-else-if="e.position == 5">咨询师</span>
+
+                    </td>
+
+                    <!-- v-show 控制元素的显示与隐藏 v-show与v-if的区别是：v-show控制元素显示与隐藏，v-show元素会保留在DOM中，适合频繁切换，v-if元素会被移除，适合静态内容一次性渲染。 -->
+                    <!-- <td>
+                        <span v-show="e.position == 1">班主任</span>
+                        <span v-show="e.position == 2">讲师</span>
+                        <span v-show="e.position == 3">学工主管</span>
+                        <span v-show="e.position == 4">教研主管</span>
+                        <span v-show="e.position == 5">咨询师</span>
+
+                    </td> -->
+                    
+                    <td>{{e.hireDate}}</td>
+                    <td>{{e.lastOpTime}}</td>
+                    <td class="action-button">
+                        <button type="button">编辑</button>
+                        <button type="button">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 页脚区域 -->
+        <footer>
+            <!-- 页脚样式 -->
+            <p>素质学习辅助系统</p>
+            <p>版权所有 Copyisnotrighthaha 2333-6666 NOT Right Reserved</p>
+        </footer>
+    </div>
+
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+        
+        createApp({
+            data() {
+                return {
+                    searchForm: {       // 封装用户输入的查询条件
+                        name: '',
+                        gender: '',
+                        position: ''
+                    },
+
+                    empList: [
+                        { "id": 1, "name": '你看**呢', "gender": 1, "image": "img/1.gif", "position": 2, "hireDate": '2023-01-01', "lastOpTime": '2023-01-01 10:00:00' },
+                        { "id": 2, "name": '我**看傻了', "gender": 1, "image": "img/1.png", "position": 5, "hireDate": '2023-01-01', "lastOpTime": '2023-01-01 10:00:00' },
+                        { "id": 3, "name": '你看***呢', "gender": 2, "image": "img/1.gif", "position": 1, "hireDate": '2023-01-01', "lastOpTime": '2023-01-01 10:00:00' }
+                    ]
+                }
+            },
+            methods: {
+                search(){
+                    // 将搜索条件输出到控制台
+                    console.log(this.searchForm);
+                },
+
+                clear(){
+                    // 清空表单数据
+                    this.searchForm = {name:'', gender:'', position:''};  
+                }
+            },
+        }).mount('#container');
+
+        // 获取所有的tr标签
+        let trs = document.querySelectorAll('tr');
+        
+        // 为每个tr标签添加鼠标移入和移出的事件监听
+        for(let i = 1; i < trs.length; i++){
+            trs[i].addEventListener('mouseenter', function(){
+                this.style.backgroundColor = '#f2e2e2';
+            });
+        
+            trs[i].addEventListener('mouseleave', function(){
+                this.style.backgroundColor = 'white';
+            });
+        }
+
+        </script>
+</body>
+</html>

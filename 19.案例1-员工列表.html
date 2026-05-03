@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>素质学习辅助系统</title>
+    <style>
+        /* 顶部导航栏样式 */
+        .navbar {
+            background-color: #b5b3b3;
+
+            /* 控制h1和超链接的样式 */
+            display: flex;      /* 弹性布局 */
+            justify-content: space-between;     /* 两端对齐 */
+            
+            padding: 10px;   /* 内边距 */
+            align-items: center;     /* 垂直居中对齐 */
+        }
+
+        .navbar h1 {
+            margin: 0;      /* 移除默认的外边距 */
+            font-weight: bold;  /* 加粗 */
+            color: white;
+            font-family: "楷体";     /* 字体 */
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;      /* 去掉下划线 */
+        }
+
+        /* 搜索表单样式 */
+        .search-form {
+            display: flex;      /* 弹性布局 */
+            flex-wrap: nowrap;      /* 不换行 */
+            align-items: center;     /* 垂直居中对齐 */
+            gap: 10px;      /* 控件之间的间距 */
+            margin: 20px 0;
+        }
+
+        .search-form input[type="text"], .search-form select {
+            padding: 5px;
+            width: 260px;
+        }
+
+        .search-form button {
+            padding: 5px, 15px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;      /* 合并单元格 */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {    /* 表头 */
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even){     /* 偶数行 */
+            background-color: #f2f2f2;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #b5b3b3;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 30px;
+        }
+
+        /* 容器样式 */
+        #container { 
+            width: 80%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"> 
+        <!-- 顶部导航栏区域 -->
+        <div class="navbar">
+            <h1 >素质学习辅助系统</h1>
+            <a href="#">退出登录</a>
+        </div>
+
+        <!-- 搜索表单区域 -->
+        <form action="/search" method="post" class="search-form">
+            <label for="name">姓名：</label>
+            <input type="text" id="name" name="name" placeholder="请输入姓名">
+
+            <label for="gender">性别：</label>
+            <select name="gender" id="gender">
+                <option value="请选择"></option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+
+            <label for="position">职位：</label>
+            <select name="position" id="position">
+                <option value="请选择"></option>
+                <option value="班主任">班主任</option>
+                <option value="讲师">讲师</option>
+                <option value="学工主管">学工主管</option>
+                <option value="教研主管">教研主管</option>
+                <option value="咨询师">咨询师</option>
+            </select>
+
+            <button type="submit">查询</button>
+            <button type="reset">清空</button>
+        </form>
+
+        <!-- 表格展示区 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>头像</th>
+                    <th>职位</th>
+                    <th>入职日期</th>
+                    <th>最后操作时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>你看**呢</td>
+                    <td>男</td>
+                    <td><img class="avatar" src="img/1.gif" alt="图片描述"></td>
+                    <td>讲师</td>
+                    <td>2023-01-01</td>
+                    <td>2023-01-01 10:00:00</td>
+                    <td class="action-button">
+                        <button type="button">编辑</button>
+                        <button type="button">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>我**看傻了</td>
+                    <td>男</td>
+                    <td><img class="avatar" src="img/1.png" alt="图片描述"></td>
+                    <td>咨询师</td>
+                    <td>2023-01-01</td>
+                    <td>2023-01-01 10:00:00</td>
+                    <td class="action-button">
+                        <button type="button">编辑</button>
+                        <button type="button">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>你看***呢</td>
+                    <td>女</td>
+                    <td><img class="avatar" src="img/1.gif" alt="图片描述"></td>
+                    <td>班主任</td>
+                    <td>2023-01-01</td>
+                    <td>2023-01-01 10:00:00</td>
+                    <td class="action-button">
+                        <button type="button">编辑</button>
+                        <button type="button">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 页脚区域 -->
+        <footer>
+            <!-- 页脚样式 -->
+            <p>素质学习辅助系统</p>
+            <p>版权所有 Copyisnotrighthaha 2333-6666 NOT Right Reserved</p>
+        </footer>
+    </div>
+
+    <script>
+        // 获取所有的tr标签
+        let trs = document.querySelectorAll('tr');
+
+        // 为每个tr标签添加鼠标移入和移出的事件监听
+        for(let i = 1; i < trs.length; i++){
+            trs[i].addEventListener('mouseenter', function(){
+                this.style.backgroundColor = '#f2e2e2';
+            });
+
+            trs[i].addEventListener('mouseleave', function(){
+                this.style.backgroundColor = 'white';
+            });
+        }
+    </script>
+</body>
+</html>
