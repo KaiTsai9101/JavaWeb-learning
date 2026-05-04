@@ -105,18 +105,18 @@
             <label for="gender">性别：</label>
             <select name="gender" id="gender" v-model="searchForm.gender">
                 <option value="请选择"></option>
-                <option value="男">男</option>
-                <option value="女">女</option>
+                <option value="1">男</option>
+                <option value="2">女</option>
             </select>
 
             <label for="job">职位：</label>
             <select name="job" id="job" v-model="searchForm.job">
                 <option value="请选择"></option>
-                <option value="班主任">班主任</option>
-                <option value="讲师">讲师</option>
-                <option value="学工主管">学工主管</option>
-                <option value="教研主管">教研主管</option>
-                <option value="咨询师">咨询师</option>
+                <option value="1">班主任</option>
+                <option value="2">讲师</option>
+                <option value="3">学工主管</option>
+                <option value="4">教研主管</option>
+                <option value="5">咨询师</option>
             </select>
 
             <!-- v-on:click="" 绑定点击事件，可简写为@click="" -->
@@ -206,11 +206,15 @@
                 }
             },
             methods: {
-                search(){
-                    // 发送ajax请求，获取数据
-                    axios.get(`https://web-server.itheima.net/emps/list?name=${this.searchForm.name}&gender=${this.searchForm.gender}&job=${this.searchForm.job}`).then((result) => {
-                        this.empList = result.data.data;
-                    });
+                async search(){     // 加了async-await关键字，方法会变成同步方法
+                    // 发送ajax请求，获取数据（异步交互）
+                    // axios.get(`https://web-server.itheima.net/emps/list?name=${this.searchForm.name}&gender=${this.searchForm.gender}&job=${this.searchForm.job}`).then((result) => {
+                    //     this.empList = result.data.data;
+                    // });
+                    // console.log('异步交互这句话会先完成，因为不用等ajax请求返回');
+
+                    let result = await axios.get(`https://web-server.itheima.net/emps/list?name=${this.searchForm.name}&gender=${this.searchForm.gender}&job=${this.searchForm.job}`);
+                    this.empList = result.data.data;
                 },
 
                 clear(){
@@ -219,6 +223,12 @@
                     this.search();      // 重新查询
                 }
             },
+
+            // 钩子函数，在页面渲染完成后执行
+            mounted(){
+                // 页面渲染完成后，发送ajax请求，获取数据
+                this.search();
+            }
         }).mount('#container');
 
         // 获取所有的tr标签
