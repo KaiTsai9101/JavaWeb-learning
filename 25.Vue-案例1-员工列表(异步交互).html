@@ -208,12 +208,12 @@
             methods: {
                 async search(){     // 加了async-await关键字，方法会变成同步方法
                     // 发送ajax请求，获取数据（异步交互）
-                    // axios.get(`https://web-server.itheima.net/emps/list?name=${this.searchForm.name}&gender=${this.searchForm.gender}&job=${this.searchForm.job}`).then((result) => {
+                    // axios.get(`./resources/user.json?name=${this.searchForm.name}&gender=${this.searchForm.gender}&job=${this.searchForm.job}`).then((result) => {
                     //     this.empList = result.data.data;
                     // });
                     // console.log('异步交互这句话会先完成，因为不用等ajax请求返回');
 
-                    let result = await axios.get(`https://web-server.itheima.net/emps/list?name=${this.searchForm.name}&gender=${this.searchForm.gender}&job=${this.searchForm.job}`);
+                    let result = await axios.get(`./resources/user.json?name=${this.searchForm.name}&gender=${this.searchForm.gender}&job=${this.searchForm.job}`);
                     this.empList = result.data.data;
                 },
 

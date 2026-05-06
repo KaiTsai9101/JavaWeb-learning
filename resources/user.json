@@ -1,0 +1,27 @@
+{
+    "code": 1, 
+    "msg": "success",  
+    "data": [
+        { 
+            "id": 1, 
+            "name": "你看**呢", 
+            "gender": 1, "image": "../img/1.gif", 
+            "job": 2, "entrydate": "2023-01-01", 
+            "updatetime": "2023-01-01 10:00:00" 
+        },
+        {
+            "id": 2, 
+            "name": "我**看傻了", 
+            "gender": 1, "image": "../img/1.png", 
+            "job": 5, "entrydate": "2023-01-01", 
+            "updatetime": "2023-01-01 10:00:00" 
+        },
+        { 
+            "id": 3, 
+            "name": "你看***呢", 
+            "gender": 2, "image": "../img/1.gif", 
+            "job": 1, "entrydate": "2023-01-01", 
+            "updatetime": "2023-01-01 10:00:00" 
+        }
+    ]
+}
