@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: springboot-mybatis-quickstart
+  # 配置数据库连接信息
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/web01
+    username: root
+    password: 123456
+
+# 添加mybatis的日志输出
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
