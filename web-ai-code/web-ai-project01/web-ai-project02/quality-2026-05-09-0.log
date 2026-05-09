@@ -1,0 +1,21 @@
+2026-05-09 20:48:39.621 [main] INFO  chapter1.test.QualityWebManagementApplication - Starting QualityWebManagementApplication using Java 17.0.17 with PID 22104 (F:\javaweb-learning\web-ai-code\web-ai-project02\quality-web-management\target\classes started by Kai in F:\javaweb-learning\web-ai-code\web-ai-project02)
+2026-05-09 20:48:39.622 [main] INFO  chapter1.test.QualityWebManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-09 20:48:40.289 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-09 20:48:40.297 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-05-09 20:48:40.306 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-09 20:48:40.306 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.54]
+2026-05-09 20:48:40.345 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-09 20:48:40.345 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 688 ms
+2026-05-09 20:48:40.718 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-05-09 20:48:40.733 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-05-09 20:48:40.740 [main] INFO  chapter1.test.QualityWebManagementApplication - Started QualityWebManagementApplication in 1.42 seconds (process running for 2.04)
+2026-05-09 20:59:21.930 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-09 20:59:21.930 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-09 20:59:21.932 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-05-09 20:59:21.995 [http-nio-8080-exec-1] INFO  chapter1.test.controller.DeptController - 根据ID查询部门：10
+2026-05-09 20:59:22.017 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-09 20:59:22.549 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@79e7cfc7
+2026-05-09 20:59:22.551 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-09 20:59:26.761 [http-nio-8080-exec-3] INFO  chapter1.test.controller.DeptController - 根据ID查询部门：2
+2026-05-09 21:02:20.611 [http-nio-8080-exec-6] INFO  chapter1.test.controller.DeptController - 根据ID查询部门：1
+2026-05-09 22:40:50.946 [HikariPool-1:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m26s627ms968µs301ns).
