@@ -145,3 +145,8 @@ select e.*, d.name from emp e left join dept d on e.dept_id = d.id limit 5;
 
 -- 查询第2页，每页展示5条数据
 select e.*, d.name from emp e left join dept d on e.dept_id = d.id limit 5, 5;
+
+-- 条件查询
+select e.*, d.name from emp e left join dept d on e.dept_id = d.id
+                   where e.name like concat('%', '张', '%') and e.gender = 1 and e.entry_date between '2000-01-01' and '2020-01-01'
+                   order by e.update_time desc;
