@@ -1,14 +1,21 @@
 package chapter1.test.service.impl;
 
+import chapter1.test.mapper.EmpExprMapper;
 import chapter1.test.mapper.EmpMapper;
 import chapter1.test.pojo.Emp;
+import chapter1.test.pojo.EmpExpr;
+import chapter1.test.pojo.EmpQueryParam;
 import chapter1.test.pojo.PageResult;
 import chapter1.test.service.EmpService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -16,6 +23,8 @@ public class EmpServiceImpl implements EmpService {
 
     @Autowired
     private EmpMapper empMapper;
+    @Autowired
+    private EmpExprMapper empExprMapper;
 
     // 原始分页查询
 //    @Override
@@ -32,16 +41,34 @@ public class EmpServiceImpl implements EmpService {
 
     // pagehelper分页查询
     @Override
-    public PageResult<Emp> page(Integer page, Integer pageSize) {
+    public PageResult<Emp> page(EmpQueryParam empQueryParam) {
         // 设置分页参数
-        PageHelper.startPage(page, pageSize);
+        PageHelper.startPage(empQueryParam.getPage(), empQueryParam.getPageSize());
 
         // 执行查询操作
-        List<Emp> empList = empMapper.list();
+        List<Emp> empList = empMapper.list(empQueryParam);
 
         // Page<T> extends ArrayList<T>, ArrayList<T> implements List<T>
         // 解析查询结果，并封装
         Page<Emp> p = (Page<Emp>) empList;
         return new PageResult<Emp>(p.getTotal(), p.getResult());
+    }
+
+    @Override
+    public void save(Emp emp) {
+        // 保存员工基本信息
+        emp.setCreateTime(LocalDateTime.now());
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.insert(emp);
+
+        // 保存员工工作经历信息
+        List<EmpExpr> exprList = emp.getExprList();
+        if (!CollectionUtils.isEmpty(exprList)){
+            // 遍历集合，为empId赋值
+            exprList.forEach(empExpr -> {
+                empExpr.setEmpId(emp.getId());
+            });
+            empExprMapper.insertBatch(exprList);
+        }
     }
 }
