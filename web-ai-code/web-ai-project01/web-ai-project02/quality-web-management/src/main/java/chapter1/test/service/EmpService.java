@@ -6,6 +6,7 @@ import chapter1.test.pojo.PageResult;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface EmpService {
     /*
@@ -18,4 +19,7 @@ public interface EmpService {
 
     // 新增员工信息
     void save(Emp emp);
+
+    // 批量删除员工信息
+    void delete(List<Integer> ids);
 }
