@@ -150,3 +150,10 @@ select e.*, d.name from emp e left join dept d on e.dept_id = d.id limit 5, 5;
 select e.*, d.name from emp e left join dept d on e.dept_id = d.id
                    where e.name like concat('%', '张', '%') and e.gender = 1 and e.entry_date between '2000-01-01' and '2020-01-01'
                    order by e.update_time desc;
+
+-- 创建员工日志表
+create table emp_log(
+    id int unsigned primary key auto_increment comment 'ID, 主键',
+    operate_time datetime comment '操作时间',
+    info varchar(2000) comment '日志信息'
+) comment '员工日志表';
