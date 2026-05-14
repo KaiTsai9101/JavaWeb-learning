@@ -2,6 +2,7 @@ package chapter1.test.service;
 
 import chapter1.test.pojo.Emp;
 import chapter1.test.pojo.EmpQueryParam;
+import chapter1.test.pojo.LoginInfo;
 import chapter1.test.pojo.PageResult;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,4 +23,16 @@ public interface EmpService {
 
     // 批量删除员工信息
     void delete(List<Integer> ids);
+
+    // 根据ID查询员工信息
+    Emp getInfo(Integer id);
+
+    // 修改员工信息
+    void update(Emp emp);
+
+    // 查询所有员工信息
+    List<Emp> listAll(Emp emp);
+
+    // 登录
+    LoginInfo login(Emp emp);
 }

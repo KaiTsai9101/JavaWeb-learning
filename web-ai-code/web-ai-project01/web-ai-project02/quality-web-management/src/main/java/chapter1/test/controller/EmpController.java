@@ -60,4 +60,27 @@ public class EmpController {
         empService.delete(ids);
         return Result.success();
     }
+
+    // 根据ID查询员工数据
+    @GetMapping("/{id}")        // @PathVariable注解将URL中的参数转为方法参数
+    public Result getInfo(@PathVariable Integer id) {
+        log.info("根据ID查询员工: {}", id);
+        Emp emp = empService.getInfo(id);
+        return Result.success(emp);
+    }
+
+    // 修改员工数据
+    @PutMapping
+    public Result update(@RequestBody Emp emp) {
+        log.info("修改员工: {}", emp);
+        empService.update(emp);
+        return Result.success();
+    }
+
+    @GetMapping("/list")
+    public Result list(Emp emp) {
+        log.info("查询所有员工列表: {}",  emp);
+        List<Emp> empList = empService.listAll(emp);
+        return Result.success(empList);
+    }
 }
