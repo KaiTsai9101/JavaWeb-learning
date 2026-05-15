@@ -1,0 +1,48 @@
+package chapter1.test.aop;
+
+import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
+import org.springframework.stereotype.Component;
+
+@Slf4j
+@Component
+@Aspect
+public class MyAspect1{
+    // 定义切入点
+    @Pointcut("execution(* chapter1.test.service.impl.*.*(..))")
+    public void pointcut(){}
+
+    // 前置通知 - 运行前运行
+    @Before("pointcut()")
+    public void before(){
+        log.info("before ...");
+    }
+
+    // 环绕通知 - 运行时运行
+    @Around("pointcut()")
+    public Object around(ProceedingJoinPoint pjp) throws Throwable {
+        log.info("around before ...");
+        Object result = pjp.proceed();
+        log.info("around after ...");
+        return result;
+    }
+
+    // 后置通知 - 运行结束后运行
+    @After("pointcut()")
+    public void after(){
+        log.info("after ...");
+    }
+
+    // 返回后通知 - 目标方法运行后运行，出现异常时不运行
+    @AfterReturning("pointcut()")
+    public void afterReturning(){
+        log.info("afterReturning ...");
+    }
+
+    // 异常后通知 - 目标方法运行后运行，出现异常时不运行
+    @AfterThrowing("pointcut()")
+    public void afterThrowing(){
+        log.info("afterThrowing ...");
+    }
+}

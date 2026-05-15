@@ -5,6 +5,7 @@ import chapter1.test.mapper.EmpMapper;
 import chapter1.test.pojo.*;
 import chapter1.test.service.EmpLogService;
 import chapter1.test.service.EmpService;
+import chapter1.test.utils.JwtUtils;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,9 @@ import org.springframework.util.CollectionUtils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -133,7 +136,14 @@ public class EmpServiceImpl implements EmpService {
         // 判断是否存在这个员工，如果存在，则返回登录信息
         if (e != null){
             log.info("登录成功，员工信息: {}", e);
-            return new LoginInfo(e.getId(), e.getUsername(), e.getName(), "");
+
+            // 生成JWT令牌
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("id", e.getId());
+            claims.put("username", e.getUsername());
+            String token = JwtUtils.generateToken(claims);
+
+            return new LoginInfo(e.getId(), e.getUsername(), e.getName(), token);
         }
 
         // 不存在，则返回null
