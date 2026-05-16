@@ -1,5 +1,6 @@
 package chapter1.test.controller;
 
+import chapter1.test.anno.Log;
 import chapter1.test.pojo.Dept;
 import chapter1.test.pojo.Result;
 import chapter1.test.service.DeptService;
@@ -50,6 +51,7 @@ public class DeptController {
 //    }
 
     // 删除部门 - 方式三：省略@RequestParam（前端传递的请求参数名与服务端方法形参名一致）
+    @Log
     @DeleteMapping
     public Result delete(Integer id) {
         // System.out.println("删除部门：" + id);
@@ -61,6 +63,7 @@ public class DeptController {
     // 新增部门
     // 这里需要在请求体中添加JSON数据，所以需要使用@RequestBody注解
     // 传json数据时，json的键需要和Dept对象中的属性名一致才能成功封装
+    @Log
     @PostMapping
     public Result add(@RequestBody Dept dept) {     // @RequestBody：将请求体中的数据映射为Dept对象
         // System.out.println("新增部门：" + dept);
@@ -80,6 +83,7 @@ public class DeptController {
         return Result.success(dept);
     }
 
+    @Log
     @PutMapping
     public Result update(@RequestBody Dept dept) {
         // System.out.println("修改部门：" + dept);

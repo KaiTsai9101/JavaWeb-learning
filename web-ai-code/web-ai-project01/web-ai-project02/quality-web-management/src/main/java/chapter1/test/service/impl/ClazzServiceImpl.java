@@ -9,7 +9,6 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,6 +23,7 @@ public class ClazzServiceImpl implements ClazzService {
 
     // 分页查询班级列表
     @Override
+//    @LogOperation
     public PageResult<Clazz> page(ClazzQueryParam clazzQueryParam) {
         // 设置分页参数
         PageHelper.startPage(clazzQueryParam.getPage(), clazzQueryParam.getPageSize());

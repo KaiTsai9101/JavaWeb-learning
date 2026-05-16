@@ -1,6 +1,8 @@
 package chapter1.test.filter;
 
+import chapter1.test.utils.CurrentHolder;
 import chapter1.test.utils.JwtUtils;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,7 +41,10 @@ public class TokenFilter implements Filter {
 
         // 如果token存在，校验令牌，如果校验失败，则返回错误信息，状态码401
         try {
-            JwtUtils.parseToken(token);
+            Claims claims = JwtUtils.parseToken(token);
+            Integer empId = Integer.valueOf(claims.get("id").toString());
+            CurrentHolder.setCurrentId(empId);
+            log.info("当前用户ID: {}，将其存入ThreadLocal", empId);
         } catch (Exception e) {
             log.info("令牌非法，响应401");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);        // HttpServletResponse中SC_UNAUTHORIZED的值为401
@@ -49,5 +54,8 @@ public class TokenFilter implements Filter {
         // 校验通过，则放行
         log.info("令牌合法，放行");
         filterChain.doFilter(request, response);
+
+        // 删除ThreadLocal中的数据（释放内存）
+        CurrentHolder.remove();
     }
 }
