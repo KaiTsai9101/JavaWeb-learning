@@ -171,3 +171,15 @@ where c.id = 1;
 INSERT INTO quality.student (id, name, no, gender, phone, id_card, is_college, address, degree, graduation_date, clazz_id, violation_count, violation_score, create_time, update_time) VALUES (16, '张三99', '2022000016', 1, '18800008501', '110120000300200016', 1, '这是一个地址16号', 4, '2021-07-01', 4, 0, 0, '2024-11-14 21:22:19', '2024-11-14 21:22:19');
 INSERT INTO quality.student (id, name, no, gender, phone, id_card, is_college, address, degree, graduation_date, clazz_id, violation_count, violation_score, create_time, update_time) VALUES (17, '李四99', '2022000017', 2, '18800007601', '110120000300200017', 1, '这是一个地址17号', 2, '2022-07-01', 4, 0, 0, '2024-11-14 21:22:19', '2024-11-14 21:22:19');
 INSERT INTO quality.student (id, name, no, gender, phone, id_card, is_college, address, degree, graduation_date, clazz_id, violation_count, violation_score, create_time, update_time) VALUES (18, '王五99', '2024001101', 1, '13309092345', '110110110110110110', 0, '这是一个地址18号', 5, '2021-07-01', 3, 2, 7, '2024-11-15 16:26:18', '2024-11-15 16:40:10');
+
+-- 操作日志表
+create table operate_log(
+    id int unsigned primary key auto_increment comment 'ID',
+    operate_emp_id int unsigned comment '操作人ID',
+    operate_time datetime comment '操作时间',
+    class_name varchar(100) comment '操作的类名',
+    method_name varchar(100) comment '操作的方法名',
+    method_param varchar(2000) comment '方法参数',
+    return_value varchar(2000) comment '返回值',
+    cost_time bigint unsigned comment '方法执行耗时，单位：ms'
+) comment '操作日志表';
