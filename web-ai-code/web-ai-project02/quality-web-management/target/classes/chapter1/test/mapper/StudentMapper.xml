@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chapter1.test.mapper.StudentMapper">
+    <!-- 分页查询 -->
+    <select id="page" resultType="chapter1.test.pojo.Student">
+        select s.*, c.name clazzName from student s
+        left join clazz c on s.clazz_id = c.id
+        <where>
+            <if test="id != null">
+                and s.id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and s.name like concat('%', #{name}, '%')
+            </if>
+            <if test="no != null and no != ''">
+                and s.no like concat('%', #{no}, '%')
+            </if>
+            <if test="gender != null">
+                and s.gender = #{gender}
+            </if>
+            <if test="phone != null and phone != ''">
+                and s.phone like concat('%', #{phone}, '%')
+            </if>
+            <if test="idCard != null and idCard != ''">
+                and s.id_card like concat('%', #{idCard}, '%')
+            </if>
+            <if test="isCollege != null">
+                and s.is_college = #{isCollege}
+            </if>
+            <if test="address != null and address != ''">
+                and s.address like concat('%', #{address}, '%')
+            </if>
+            <if test="degree != null">
+                and s.degree = #{degree}
+            </if>
+            <if test="graduationDate != null">
+                and s.graduation_date = #{graduationDate}
+            </if>
+            <if test="clazzId != null">
+                and s.clazz_id = #{clazzId}
+            </if>
+            <if test="violationCount != null">
+                and s.violation_count = #{violationCount}
+            </if>
+            <if test="violationScore != null">
+                and s.violation_score = #{violationScore}
+            </if>
+            <if test="createTime != null">
+                and s.create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and s.update_time = #{updateTime}
+            </if>
+            <if test="clazzName != null and clazzName != ''">
+                and c.clazz_name like concat('%', #{clazzName}, '%')
+            </if>
+        </where>
+        order by s.update_time desc
+    </select>
+
+    <!-- 查询学生学历信息 -->
+    <select id="countStudentDegreeData" resultType="java.util.Map">
+        select
+            (case
+                when degree = 1 then '大一'
+                when degree = 2 then '大二'
+                when degree = 3 then '大三'
+                when degree = 4 then '大四'
+                else '其他' end) degreeName,
+            count(1) degreeCount
+        from student
+        group by degree;
+    </select>
+
+
+    <select id="countStudentData" resultType="java.util.Map">
+        select c.name clazzList, count(*) dataList from student s left join clazz c on s.clazz_id = c.id group by clazz_id
+    </select>
+
+    <!-- 批量删除 -->
+    <delete id="deleteByIds">
+        delete from student where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- 添加学生信息 -->
+    <insert id="save">
+        insert into student(name, no, gender, phone, id_card, is_college, address, degree, graduation_date, clazz_id, violation_count, violation_score, create_time, update_time) values
+        (#{name}, #{no}, #{gender}, #{phone}, #{idCard}, #{isCollege}, #{address}, #{degree}, #{graduationDate}, #{clazzId}, #{violationCount}, #{violationScore}, #{createTime}, #{updateTime})
+    </insert>
+
+    <!-- 修改学生信息 -->
+    <update id="updateById">
+        update student
+        <set>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="no != null and no != ''">no = #{no},</if>
+            <if test="gender != null and gender != ''">gender = #{gender},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="degree != null and degree != ''">degree = #{degree},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="isCollege != null">is_college = #{isCollege},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="graduationDate != null">graduation_date = #{graduationDate},</if>
+            <if test="violationCount != null and violationCount != ''">violation_count = #{violationCount},</if>
+            <if test="violationScore != null and violationScore != ''">violation_score = #{violationScore},</if>
+            <if test="clazzId != null and clazzId != ''">clazz_id = #{clazzId},</if>
+            <if test="updateTime != null">update_time = #{updateTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>
